@@ -1,0 +1,90 @@
+.section-contacts {
+    width: 100%;
+}
+
+.contact-form {}
+
+.contact-list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    &__item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        position: relative;
+        margin-bottom: 1rem;
+
+        &:not(:last-of-type) {
+            & input {
+                height: 4rem;
+                width: 100%;
+
+            }
+            & input, & textarea {
+                border: none;
+                padding: 0 1rem;
+                &:focus {
+                    outline: none;
+                }
+
+                &:focus+label {
+                    animation: barGrow .5s;
+                    opacity: 1;
+                }
+
+                &:focus::-webkit-input-placeholder {
+                    /* Chrome/Opera/Safari */
+                    opacity: 0;
+                }
+
+                &::-moz-placeholder {
+                    /* Firefox 19+ */
+                    opacity: 0;
+                }
+
+                &:-ms-input-placeholder {
+                    /* IE 10+ */
+                    opacity: 0;
+                }
+
+                &:-moz-placeholder {
+                    /* Firefox 18- */
+                    opacity: 0;
+                }
+            }
+        }
+
+        &-label {
+            position: absolute;
+            background-color: red;
+            padding: 0;
+            margin: 0;
+            bottom: -.2rem;
+            left: 0;
+            height: .2rem;
+            width: 100%;
+            opacity: 0;
+        }
+
+        &:nth-of-type(1) {
+            flex: 0 0 49%;
+            max-width: 50%;
+        }
+        &:nth-of-type(2) {
+            flex: 0 0 49%;
+            max-width: 50%;
+            margin-left: 2%;
+        }
+        .textarea-box {
+            height: 10rem;
+            & textarea {
+                height: 100%;
+                width: 100%;
+                outline: none;
+                padding-top: 1rem;
+            }
+        }
+    }
+}

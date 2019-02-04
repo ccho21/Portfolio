@@ -1,0 +1,58 @@
+.font {
+    -webkit-font-smoothing: antialiased;
+    &-xxl {
+        font-size: 8rem;
+    }
+    &-xl {
+        font-size: 6rem;
+    }
+    &-lg {
+        font-size: 4rem;
+    }
+    &-md {
+        font-size: 3rem;
+    }
+    &-sm {
+        font-size: 2rem;
+    }
+    &-xs {
+        font-size: 1.6rem;
+    }
+
+    // Font Weight
+    &-weight-300 {
+        font-weight: 300;
+    }
+    &-weight-400 {
+        font-weight: 400;
+    }
+    &-weight-700 {
+        font-weight: 700;
+    }
+}
+
+
+// ANIMATION
+
+.charAnimation {
+    display: inline-block;
+    cursor: default;
+    padding: .1rem;
+    transition: opacity 2s;
+    &:hover {
+        color: orange;
+    }
+}
+
+.orange {
+    color: orange;
+}
+
+.jello-vertical {
+    animation: btnShaking 1s ease-in-out;
+    animation-fill-mode: both;
+}
+
+
+
+// ANIMATION ENDS

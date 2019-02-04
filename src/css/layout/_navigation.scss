@@ -1,0 +1,123 @@
+.nav-logo {
+    width: 4rem;
+    fill: orange;
+    height: 4rem;
+
+    &:hover {
+        animation: btnShaking .8s;
+    }
+}
+@media (max-width: 768px) {
+    nav {
+        width: 100% !important;
+    }
+}
+
+.navbar {
+    & .nav-item {
+        position: relative;
+        padding: .5rem;
+        & .nav-link {
+            padding: .5rem 0;
+            margin: .5rem;
+            &:focus &:active &:visited {
+                outline: none;
+            }
+        }
+        & .nav-text {
+            position: absolute;
+            position: absolute;
+            font-size: 1rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: orange;
+            opacity: 0;
+            letter-spacing: .2rem;
+        }
+        &:hover {
+            & .icon {
+                fill: orange;
+                opacity: 0;
+            }
+
+            & .nav-text {
+                opacity: 1;
+            }
+        }
+    }
+
+    & .icon {
+        height: 3rem;
+        width: 3rem;
+        fill: rgba(0, 0, 0, .5);
+    }
+
+    &-main {}
+
+    &-social {
+        & li {
+            &:hover {
+                & .icon {
+                    fill: orange !important;
+                    opacity: 1 !important;
+                }
+            }
+        }
+
+    }
+
+    &-auth {
+
+    }
+}
+
+/*
+
+!* Site Menu*!
+.site-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #121212;
+}
+
+.site-logo {
+    text-align:center;
+    line-height: 0;
+    padding: .2rem 1rem;
+    border: .2rem solid $white;
+    color:  $white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+!* Site Header *!
+.site-header {
+
+    &.scrolled {
+        position: fixed;
+        padding: 1em 30px;
+        top: 0;
+        background: $white;
+        transition: .0s all ease;
+        transform: translateY(-100%);
+        .social {
+            margin-top: 10px;
+            li {
+                a {
+                    color: $black;
+                }
+            }
+        }
+    }
+       &.awake {
+        transition: .3s all ease;
+        transform: translateY(0%);
+    }
+    &.sleep {
+        transition: .3s all ease;
+        transform: translateY(-100%);
+    }
+}
+
+*/

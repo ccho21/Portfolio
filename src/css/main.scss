@@ -1,0 +1,20 @@
+// LIBRARIES
+@import "~bootstrap/scss/bootstrap";
+
+// BASE
+@import "base/typography";
+@import "base/variables";
+@import "base/base";
+@import "base/animation";
+
+//LAYOUTS
+@import "layout/navigation";
+@import "layout/_main-background.scss";
+@import "layout/about";
+@import "layout/contact";
+@import "layout/project";
+
+//COMPONENTS
+@import "components/_buttons.scss";
+@import "components/_home.scss";
+
