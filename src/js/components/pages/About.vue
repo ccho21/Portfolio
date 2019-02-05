@@ -2,7 +2,7 @@
     <section class="section-about text-white">
         <div class="container-fluid p-5">
             <!--CHANGE H1 HEADING LATER-->
-            <div class="p-5">
+            <div class="pb-5">
                 <transition-group tag="h2"
                                   v-bind:css="false"
                                   class="heading mb-3 text-white mb-3"

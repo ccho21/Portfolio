@@ -28,14 +28,7 @@ const Project = resolve => {
 const routes = [
     {
         path: '/',
-        component: Home, beforeEnter(to, from, next){
-            if(from.path === '/sign-in'){
-                alert('login successfully');
-                next();
-            }else {
-                next();
-            }
-        }
+        component: Home,
     },
     {
         path: '/about',

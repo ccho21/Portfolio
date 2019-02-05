@@ -51,7 +51,7 @@
                 </li>
             </ul>
             <ul class="list-unstyled navbar-main d-flex flex-md-column flex-row align-items-center">
-                <router-link to="/" class="nav-item" active-class="active" tag="li">
+                <router-link to="/" class="nav-item" tag="li" active-class="active" exact>
                     <a class="nav-link text-white">
                         <svg class="icon">
                             <use xlink:href="#home"/>

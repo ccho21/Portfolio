@@ -3,7 +3,7 @@
         <div class="container-fluid p-5">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="p-5">
+                    <div class="pb-5">
                         <transition-group tag="h1"
                                           v-bind:css="false"
                                           class="heading mb-3 text-white mb-3"
@@ -22,7 +22,6 @@
                     </div>
                     <div class="text-white">
                         <h2 aria-label=" Contact me" class="">Contact Me</h2>
-                        <p>Please contact me</p>
                     </div>
                     <div class="contact-form p-7 mb-5">
                         <form id="contact" autocomplete="off">

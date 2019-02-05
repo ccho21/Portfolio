@@ -21,6 +21,7 @@ const mutations = {
     clearAuthData(state) {
         state.idToken = null;
         state.userId = null;
+        state.user = null;
     }
 };
 const actions = {
@@ -75,6 +76,7 @@ const actions = {
                 dispatch('setLogoutTimer', res.data.expiresIn);
 
                 if(state.idToken) {
+                    alert('Successfully Logged in!')
                     router.replace('/');
                 }
             })
@@ -101,7 +103,7 @@ const actions = {
         localStorage.removeItem('expirationDate');
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
-        router.replace('/sign-in');
+        router.push('/sign-in');
     },
     storeUser({commit, state}, userData) {
         if (!state.idToken) {

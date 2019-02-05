@@ -14,6 +14,7 @@
 }
 
 .navbar {
+
     & .nav-item {
         position: relative;
         padding: .5rem;
@@ -25,7 +26,6 @@
             }
         }
         & .nav-text {
-            position: absolute;
             position: absolute;
             font-size: 1rem;
             top: 50%;
@@ -53,9 +53,20 @@
         fill: rgba(0, 0, 0, .5);
     }
 
-    &-main {}
+    &-main {
+        & > .active {
+            & .icon {
+                fill: orange;
+            }
+        }
+    }
 
     &-social {
+        & > .active {
+            & .icon {
+                fill: orange;
+            }
+        }
         & li {
             &:hover {
                 & .icon {
@@ -68,7 +79,11 @@
     }
 
     &-auth {
-
+        & > .active {
+            & .icon {
+                fill: orange;
+            }
+        }
     }
 }
 

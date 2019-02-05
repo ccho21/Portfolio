@@ -68,7 +68,6 @@
                         email: formData.email,
                         password: formData.password
                     });
-
             },
 
             ...mapGetters({

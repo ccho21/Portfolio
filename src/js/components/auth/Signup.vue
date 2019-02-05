@@ -115,7 +115,7 @@
                 terms: false,
                 // ANIMATION
                 animatedTitle: [],
-                message: `Sign UP`,
+                message: `Sign up`,
             }
         },
         created() {

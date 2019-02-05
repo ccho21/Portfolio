@@ -1,6 +1,6 @@
 <template>
     <div id="dashboard text-white">
-        <h1>That's the dashboard!</h1>
+        <h1>This is the dashboard!</h1>
         <p>You should only get here if you're authenticated!</p>
         <p v-if="email">Your email address: {{ email }}</p>
     </div>
