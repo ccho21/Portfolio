@@ -10,9 +10,6 @@ import * as mutations from './mutations';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
-        message : ''
-    },
     actions,
     getters,
     mutations,

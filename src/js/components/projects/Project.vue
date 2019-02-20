@@ -1,6 +1,6 @@
 <template>
     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 p-0">
-        <div >
+        <div>
             <a href="" class="project-link d-block" data-toggle="modal" :data-target="`project-detail-${project.id}`"
                @click.prevent="openModal"
                @keyup.esc="closeModal">
@@ -18,6 +18,7 @@
              data-dismiss="modal"
              tabindex="-1" role="dialog" aria-labelledby="project-detail"
              aria-hidden="true">
+
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-close d-flex justify-content-center align-content-center">
@@ -45,7 +46,11 @@
     </div>
 </template>
 <script>
+    import ProjectModal from './ProjectModal.vue';
     export default {
+        components  :{
+            ProjectModal: ProjectModal,
+        },
         props: ['project'],
         data() {
             return {
@@ -57,7 +62,6 @@
                 return require('../../../assets/images/' + src);
             },
             openModal(e) {
-
                 const dataTarget = e.target.closest('.project-link').dataset.target;
                 const targetModal = document.querySelector(`#${dataTarget}`);
                 targetModal.style.display = "block";
@@ -73,11 +77,6 @@
                     this.slideIndex = 1;
                 }
             },
-            plusSlides(n) {
-                this.slideIndex += n
-                this.showSlides(this.slideIndex);
-            },
-
             showSlides(n) {
                 let slides = document.querySelectorAll(`.mySlides-${this.project.id}`);
                 if (n > slides.length) {
@@ -92,8 +91,11 @@
                     cur.style.display = 'none';
                 });
                 slides[this.slideIndex - 1].style.display = "block";
-            }
-
+            },
+            plusSlides(n) {
+                this.slideIndex += n
+                this.showSlides(this.slideIndex);
+            },
         }
     }
 </script>

@@ -3,15 +3,15 @@
         <transition-group tag="h2"
                           v-bind:css="false"
                           class="heading mb-3 text-white mb-3"
-                          v-on:before-enter="beforeStartAnimation"
-                          v-on:enter="startAnimation"
-                          v-on:after-enter="removeAnimation">
+                          v-on:before-enter="$parent.beforeStartAnimation"
+                          v-on:enter="$parent.startAnimation"
+                          v-on:after-enter="$parent.removeAnimation">
                 <span v-for="(item, index) in animatedTitle"
                       v-bind:key="item.key"
                       v-bind:data-index="index"
                       :class="item.classes"
                       class="font-xl charAnimation"
-                      @mouseover="jelloVertical">
+                      @mouseover="$parent.jelloVertical">
                       {{ item.character=== ' ' ? '&nbsp' : item.character }}
                 </span>
         </transition-group>
@@ -62,7 +62,7 @@
                         <option value="india">India</option>
                         <option value="uk">UK</option>
                         <option value="germany">Germany</option>
-                        <option value="germany">Canada</option>
+                        <option value="canada">Canada</option>
                     </select>
                 </div>
                 <div class="hobbies">
@@ -91,8 +91,10 @@
                     <label for="terms">Accept Terms of Use</label>
                 </div>
                 <div class="submit">
-                    <button type="submit" :disabled="$v.$invalid">Submit</button>
+                    <button type="submit" >Submit</button>
+                <!--:disabled="$v.$invalid"-->
                 </div>
+
             </form>
         </div>
     </div>
@@ -101,7 +103,6 @@
 <script>
     import {required, email, numeric, minValue, minLength, sameAs, requiredUnless} from 'vuelidate/lib/validators';
     import axios from 'axios';
-    import {mapGetters} from 'vuex';
 
     export default {
         data() {
@@ -119,8 +120,7 @@
             }
         },
         created() {
-            this.$store.dispatch('setMessage', this.message);
-            this.animatedTitle = this.charInit();
+            this.animatedTitle = this.$parent.charInit(this.message);
         },
         validations: {
             email: {
@@ -193,35 +193,11 @@
                     terms: this.terms
                 };
                 console.log(formData);
-                this.$store.dispatch('signup', formData);
-            },
-
-        //    ANIMATION
-            ...mapGetters({
-                charInit: 'charInit',
-            }),
-            beforeStartAnimation(el) {
-                let delay = el.dataset.index;
-                el.style.opacity = '0';
-            },
-            startAnimation(el) {
-                let delay = el.dataset.index;
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.classList.add('jello-vertical');
-                }, delay * 100);
-            },
-            removeAnimation(el) {
-                let animationed = el.addEventListener('animationend', () => {
-                    el.classList.remove('jello-vertical');
-                })
-            },
-            // //ANIMATIONS
-            jelloVertical(e) {
-                e.target.classList.add('jello-vertical');
-                setTimeout(() => {
-                    e.target.classList.remove('jello-vertical');
-                }, 1000);
+                this.$store.dispatch('signup', formData).then((res) => {
+                    console.log(res);
+                    alert('Successfully Logged in! ');
+                    this.$router.replace('/');
+                });
             },
         }
     }

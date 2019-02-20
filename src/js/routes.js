@@ -1,6 +1,7 @@
 //VUE IMPORT
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
 Vue.use(VueRouter);
 // COMPONENT IMPORTS
 import Home from './components/Home.vue';
@@ -12,6 +13,7 @@ import SigninPage from './components/auth/signin.vue'
 
 // VUEX IMPORT
 import login from './store/modules/login';
+
 
 // LAZY LOADING
 const Projects = resolve => {
@@ -38,19 +40,17 @@ const routes = [
         path: '/contacts',
         component: Contact
     },
-    {path: '/sign-up', component: SignupPage},
     {
-        path: '/sign-in', component: SigninPage,
+        path: '/sign-up', name: 'sign-up', component: SignupPage, beforeEnter(to, from, next) {
+            next();
+        }
     },
     {
-        path: '/dashboard', component: DashboardPage, beforeEnter(to, from, next) {
-            console.log('this is state in routes.js line 47', login.state);
-            if (login.state.idToken) {
-                next();
-            } else {
-                next('/sign-in');
-            }
-        }
+        path: '/sign-in', name: 'sign-in', component: SigninPage,
+    },
+    {
+        // checking Localstorage in order to work when refreshing pages
+        path: '/dashboard', name: 'dashboard', component: DashboardPage,
     },
     {
         path: '/projects',
@@ -83,3 +83,14 @@ export default new VueRouter({
         return {x: 0, y: 0};
     }
 });
+
+// beforeEnter(to, from, next) {
+//     console.log('DASHBOARD');
+//     const token = localStorage.getItem('token');
+//     console.log(token);
+//     if (token) {
+//         next();
+//     } else {
+//         next('/sign-in');
+//     }
+// }

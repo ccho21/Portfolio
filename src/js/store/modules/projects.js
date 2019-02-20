@@ -12,19 +12,21 @@ const mutations = {
 };
 //will be removed when all the data is set in database
 const actions = {
-    initProjects: ({commit}) => {
-        axios.get('projects.json')
-            .then(
-                response => {
-                    return response;
-                }
-            )
-            .then(data => {
-                if (data) {
-                    const projects = data.data;
-                    commit('setProjects', projects);
-                }
-            });
+    fetchProjects: ({commit}) => {
+        return new Promise((resolve, reject) => {
+            axios.get('projects.json')
+                .then(res => res)
+                .then(data => {
+                    if (data) {
+                        const projects = data.data;
+                        console.log('data is successfully fetched', data);
+                        commit('setProjects', projects);
+                        resolve(data);
+                    }
+                }).catch(error => console.log('failed :', error));
+        })
+    },
+    storeProject: ({commit}, payload) => {
 
     }
 };

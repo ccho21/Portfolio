@@ -1,23 +1,23 @@
 <template>
     <nav class="navbar navbar-expand-md flex-row flex-md-column">
-            <router-link to="/" class="navbar-brand text-white p-0 m-0 mt-md-5">
-                <svg class="nav-logo ani-shaking">
-                    <use xlink:href="#copyright"/>
-                </svg>
-            </router-link>
-            <button class="navbar-toggler text-black" type="button" data-toggle="collapse"
-                    data-target="#navbarToggle"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                    @click="isNavbarOpen = !isNavbarOpen">
-                <span class="navbar-toggler-icon">COL</span>
-            </button>
-            <div></div>
+        <router-link to="/" class="navbar-brand text-white p-0 m-0 mt-md-5">
+            <svg class="nav-logo ani-shaking">
+                <use xlink:href="#copyright"/>
+            </svg>
+        </router-link>
+        <button class="navbar-toggler text-black" type="button" data-toggle="collapse"
+                data-target="#navbarToggle"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                @click="isNavbarOpen = !isNavbarOpen">
+            <span class="navbar-toggler-icon">COL</span>
+        </button>
+        <div></div>
         <div class="collapse navbar-collapse flex-md-column justify-content-md-between"
              id="navbarToggle" :class="{show: isNavbarOpen}">
             <ul class="list-unstyled text-center navbar-auth pt-md-5 pt-0 d-flex flex-md-column flex-row align-items-center">
-                <router-link to="/sign-in" class="nav-item" active-class="active" tag="li" v-if="!auth">
+                <router-link :to="{name: 'sign-in'}" class="nav-item" active-class="active" tag="li" v-if="!auth">
                     <a class="nav-link text-white">
                         <svg class="icon">
                             <use xlink:href="#user"/>
@@ -25,7 +25,7 @@
                         <div class="nav-text">LOG IN</div>
                     </a>
                 </router-link>
-                <router-link to="/sign-up" class="nav-item" active-class="active" tag="li" v-if="!auth">
+                <router-link :to="{name: 'sign-up'}" class="nav-item" active-class="active" tag="li" v-if="!auth">
                     <a class="nav-link text-white">
                         <svg class="icon">
                             <use xlink:href="#plus"/>
@@ -33,7 +33,9 @@
                         <div class="nav-text">SIGN UP</div>
                     </a>
                 </router-link>
-                <router-link to="/dashboard" class="nav-item" active-class="active" tag="li" v-if="auth">
+            </ul>
+            <ul class="list-unstyled text-center navbar-auth pt-md-5 pt-0 d-flex flex-md-column flex-row align-items-center" v-if="auth">
+                <router-link :to="{name: 'dashboard'}" class="nav-item" active-class="active" tag="li">
                     <a class="nav-link text-white">
                         <svg class="icon">
                             <use xlink:href="#wrench"/>
@@ -41,8 +43,9 @@
                         <div class="nav-text">BOARD</div>
                     </a>
                 </router-link>
+
                 <li class="nav-item">
-                    <button class="logout" @click="onLogout" v-if="auth">
+                    <button class="logout" @click="onLogout" >
                         <svg class="icon">
                             <use xlink:href="#logout"/>
                         </svg>
@@ -51,6 +54,7 @@
                 </li>
             </ul>
             <ul class="list-unstyled navbar-main d-flex flex-md-column flex-row align-items-center">
+
                 <router-link to="/" class="nav-item" tag="li" active-class="active" exact>
                     <a class="nav-link text-white">
                         <svg class="icon">
@@ -120,16 +124,19 @@
         },
         computed: {
             auth() {
-                console.log('auth working in header.vue');
                 return this.$store.getters.isAuthenticated;
             }
         },
         mounted() {
-            setTimeout(this.myFunction, 2000);
+
         },
         methods: {
             onLogout() {
-                this.$store.dispatch('logout');
+                this.$store.dispatch('logout').then((res) => {
+                    alert(`Thank you for visiting my webpage!
+                    You are successfully logged out`);
+                    this.$router.push('/sign-in');
+                });
             },
             enter(el) {
                 console.log('enter');

@@ -7,15 +7,15 @@
                         <transition-group tag="h1"
                                           v-bind:css="false"
                                           class="heading mb-3 text-white mb-3"
-                                          v-on:before-enter="beforeStartAnimation"
-                                          v-on:enter="startAnimation"
-                                          v-on:after-enter="removeAnimation">
+                                          v-on:before-enter="$parent.beforeStartAnimation"
+                                          v-on:enter="$parent.startAnimation"
+                                          v-on:after-enter="$parent.removeAnimation">
                         <span v-for="(item, index) in animatedTitle"
                               v-bind:key="item.key"
                               v-bind:data-index="index"
                               :class="item.classes"
                               class="font-xl charAnimation"
-                              @mouseover="jelloVertical">
+                              @mouseover="$parent.jelloVertical">
                               {{ item.character=== ' ' ? '&nbsp' : item.character }}
                         </span>
                         </transition-group>
@@ -71,36 +71,9 @@
             }
         },
         mounted() {
-            this.$store.dispatch('setMessage', this.message);
-            this.animatedTitle = this.charInit();
+            this.animatedTitle = this.$parent.charInit(this.message);
         },
         methods: {
-            ...mapGetters({
-                charInit: 'charInit',
-            }),
-            beforeStartAnimation(el) {
-                let delay = el.dataset.index;
-                el.style.opacity = '0';
-            },
-            startAnimation(el) {
-                let delay = el.dataset.index;
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.classList.add('jello-vertical');
-                }, delay * 100);
-            },
-            removeAnimation(el) {
-                let animationed = el.addEventListener('animationend', () => {
-                    el.classList.remove('jello-vertical');
-                })
-            },
-            // //ANIMATIONS
-            jelloVertical(e) {
-                e.target.classList.add('jello-vertical');
-                setTimeout(() => {
-                    e.target.classList.remove('jello-vertical');
-                }, 1000);
-            },
         }
     }
 </script>

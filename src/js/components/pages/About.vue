@@ -6,15 +6,15 @@
                 <transition-group tag="h2"
                                   v-bind:css="false"
                                   class="heading mb-3 text-white mb-3"
-                                  v-on:before-enter="beforeStartAnimation"
-                                  v-on:enter="startAnimation"
-                                  v-on:after-enter="removeAnimation">
+                                  v-on:before-enter="$parent.beforeStartAnimation"
+                                  v-on:enter="$parent.startAnimation"
+                                  v-on:after-enter="$parent.removeAnimation">
                 <span v-for="(item, index) in animatedTitle"
                       v-bind:key="item.key"
                       v-bind:data-index="index"
                       :class="item.classes"
                       class="font-xl charAnimation"
-                      @mouseover="jelloVertical">
+                      @mouseover="$parent.jelloVertical">
                       {{ item.character=== ' ' ? '&nbsp' : item.character }}
                 </span>
                 </transition-group>
@@ -79,7 +79,26 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    PICTURE OR SKILLS
+                    <div class="container">
+                        <transition-group
+                            tag="ul"
+                            class="list-unstyled"
+                            v-bind:css="false"
+                            v-on:before-enter="beforeSkill"
+                            v-on:enter="enterSkill"
+                            v-on:after-enter="afterSkill" appear>
+                            <li class="" v-for="(skill) in skills" v-bind:key="skill.id" :data-level="skill.level">
+                                <div class="text-white">{{skill.language}} </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" :aria-valuenow="skill.level" aria-valuemin="0"
+                                         aria-valuemax="100" :style="{width: skill.level+'%'}">
+                                        <span class="sr-only">{{skill.level}} Complete</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </transition-group>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -93,42 +112,38 @@
             return {
                 animatedTitle: [],
                 message: `About Us`,
+                skills: [
+                    {language: 'JAVASCRIPT', level: 70, id: 1},
+                    {language: 'HTML5', level: 80, id: 2},
+                    {language: 'CSS3', level: 70, id: 3},
+                    {language: 'VUE.JS', level: 60, id: 4},
+                    {language: 'LARAVEL', level: 60, id: 5},
+                    {language: 'JQUERY', level: 70, id: 6},
+                    {language: 'WORDPRESS', level: 50, id: 7},
+                    {language: 'BOOTSTRAP 4', level: 80, id: 8},
+                ]
             }
         },
         mounted() {
-            this.$store.dispatch('setMessage', this.message);
-            this.animatedTitle = this.charInit();
+            this.animatedTitle = this.$parent.charInit(this.message);
         },
         methods: {
-            ...mapGetters({
-                charInit: 'charInit',
-            }),
-            beforeStartAnimation(el) {
-                let delay = el.dataset.index;
-                el.style.opacity = '0';
+            /*SKILL ANIMATION*/
+
+            beforeSkill(el) {
+                console.log('before');
+                el.style.width = 0;
             },
-            startAnimation(el) {
-                let delay = el.dataset.index;
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.classList.add('jello-vertical');
-                }, delay * 100);
+            enterSkill(el) {
+                console.log(el.dataset.level);
+                const level = el.dataset.level;
+                el.style.width = `${level}%`;
             },
-            removeAnimation(el) {
-                let animationed = el.addEventListener('animationend', () => {
-                    el.classList.remove('jello-vertical');
-                })
-            },
-            // //ANIMATIONS
-            jelloVertical(e) {
-                e.target.classList.add('jello-vertical');
-                setTimeout(() => {
-                    e.target.classList.remove('jello-vertical');
-                }, 1000);
+            afterSkill() {
+                console.log('after');
             },
         }
     }
 </script>
-<style lang="scss" scoped>
-
+<style>
 </style>
